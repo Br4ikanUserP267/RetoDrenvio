@@ -2,7 +2,9 @@ import cors from "cors";
 
 const allowedOrigins = [
     "http://localhost:3000",  // Desarrollo
-    "https://myproductionapp.com" // Producción
+    "https://myproductionapp.com", // Producción
+    "http://localhost:5173"  // Desarrollo
+
 ];
 
 const corsOptions = {

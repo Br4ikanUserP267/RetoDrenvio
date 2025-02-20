@@ -1,16 +1,37 @@
 import Product from "../models/Product.js";
+import SpecialPrice from '../models/SpecialPrice.js';
+
 import { sendSuccess, sendError } from "../helpers/response.helper.js";
 
 // Obtener todos los productos
-export const getProducts = async (req, res) => {
+export const getAllProductsWithDiscounts = async (req, res) => {
     try {
+        // Obtener todos los productos
         const products = await Product.find();
-        sendSuccess(res, products, "Products retrieved successfully");
+
+        // Obtener los precios especiales
+        const specialPrices = await SpecialPrice.find();
+
+        // Crear un mapa de precios especiales para acceso rápido
+        const specialPriceMap = new Map(
+            specialPrices.map(sp => [sp.productId.toString(), sp.specialPrice])
+        );
+
+        // Mapear productos y agregar descuento si aplica
+        let productsWithDiscounts = products.map(product => ({
+            ...product.toObject(),
+            price: product.price, // Precio normal
+            discountPrice: specialPriceMap.get(product._id.toString()) || null, // Precio con descuento si existe
+        }));
+
+        // Ordenar los productos con descuento primero
+        productsWithDiscounts.sort((a, b) => (b.discountPrice ? 1 : 0) - (a.discountPrice ? 1 : 0));
+
+        sendSuccess(res, productsWithDiscounts, "All products retrieved successfully with discounts");
     } catch (error) {
         sendError(res, error);
     }
 };
-
 // Obtener un producto por ID
 export const getProductById = async (req, res) => {
     try {
@@ -22,47 +43,3 @@ export const getProductById = async (req, res) => {
     }
 };
 
-// Crear un nuevo producto con imagen
-export const createProduct = async (req, res) => {
-    try {
-        const { name, description, price, stock, category } = req.body;
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
-
-        const newProduct = new Product({ name, description, price, stock, category, imageUrl });
-        await newProduct.save();
-
-        sendSuccess(res, newProduct, "Product created successfully", 201);
-    } catch (error) {
-        sendError(res, error, 400);
-    }
-};
-
-// Actualizar un producto con imagen
-export const updateProduct = async (req, res) => {
-    try {
-        const { name, description, price, stock, category } = req.body;
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : req.body.imageUrl;
-
-        const updatedProduct = await Product.findByIdAndUpdate(
-            req.params.id,
-            { name, description, price, stock, category, imageUrl },
-            { new: true }
-        );
-
-        if (!updatedProduct) return sendError(res, { message: "Product not found" }, 404);
-        sendSuccess(res, updatedProduct, "Product updated successfully");
-    } catch (error) {
-        sendError(res, error);
-    }
-};
-
-// Eliminar un producto
-export const deleteProduct = async (req, res) => {
-    try {
-        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
-        if (!deletedProduct) return sendError(res, { message: "Product not found" }, 404);
-        sendSuccess(res, null, "Product deleted successfully");
-    } catch (error) {
-        sendError(res, error);
-    }
-};
