@@ -38,8 +38,11 @@ pnpm install
 🚀 Ejecución del Proyecto
 Para iniciar el backend con pnpm:
 
-bash
 
-pnpm start O con npm: npm start
+En la consola ingresa los codigos 
+con npm 
+pnpm start 
+
+O con npm: 
 
 npm start
