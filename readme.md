@@ -39,12 +39,7 @@ pnpm install
 Para iniciar el backend con pnpm:
 
 bash
-Copiar
-Editar
-pnpm start
-O con npm:
 
-bash
-Copiar
-Editar
+pnpm start O con npm: npm start
+
 npm start
