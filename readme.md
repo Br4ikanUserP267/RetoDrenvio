@@ -32,27 +32,19 @@ Aplicación que consume y actualiza datos en una base de datos MongoDB a través
 
 ## 📦 Instalación del Proyecto
 
-```sh
+```bash
+# Instalar dependencias
 pnpm install
 🚀 Ejecución del Proyecto
 Para iniciar el backend con pnpm:
 
-sh
+bash
 Copiar
 Editar
 pnpm start
 O con npm:
 
-sh
+bash
 Copiar
 Editar
 npm start
-arduino
-Copiar
-Editar
-Copiar
-Editar
-Este texto está listo para copiar y pegar sin problemas. 🚀
-
-Copiar
-Editar
