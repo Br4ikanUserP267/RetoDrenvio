@@ -16,9 +16,9 @@ export const getSpecialPrices = async (req, res) => {
 // Create a new special price
 export const createSpecialPrice = async (req, res) => {
     try {
-        const { productId } = req.body;
+        const { productId, specialPrice } = req.body;
 
-        // Verificar si ya existe un precio especial para este producto
+        // Verificar si el precio especial ya existe para el producto
         const existingSpecialPrice = await SpecialPrice.findOne({ productId });
 
         if (existingSpecialPrice) {
@@ -28,7 +28,32 @@ export const createSpecialPrice = async (req, res) => {
             });
         }
 
-        // Si no existe, crear el nuevo precio especial
+        // Verificar que el precio especial sea válido
+        if (specialPrice <= 0) {
+            return res.status(400).json({
+                success: false,
+                message: "El precio especial debe ser mayor que 0.",
+            });
+        }
+
+        // Obtener el producto para verificar su precio original
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Producto no encontrado.",
+            });
+        }
+
+        // Validar que el precio especial sea menor que el precio original
+        if (specialPrice >= product.price) {
+            return res.status(400).json({
+                success: false,
+                message: "El precio especial debe ser menor que el precio original del producto.",
+            });
+        }
+
+        // Crear el nuevo precio especial
         const newSpecialPrice = new SpecialPrice(req.body);
         await newSpecialPrice.save();
 

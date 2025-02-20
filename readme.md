@@ -22,9 +22,7 @@ Aplicación que consume y actualiza datos en una base de datos MongoDB a través
 │   │   ├── global.middleware.js  
 │   │   ├── routes.middleware.js  
 │   ├── 📂 tests  
-│   │   ├── test_product.js  
-│   │   ├── test_specialPrice.js  
-│   ├── 📂 uploads  
+│   │   ├── index.spec.js 
 │   ├── index.js  
 │   ├── app.js  
 │   ├── package.json  

@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+
   },
   "keywords": [],
   "author": "",

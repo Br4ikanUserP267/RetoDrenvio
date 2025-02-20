@@ -33,13 +33,4 @@ export const getAllProductsWithDiscounts = async (req, res) => {
     }
 };
 // Obtener un producto por ID
-export const getProductById = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        if (!product) return sendError(res, { message: "Product not found" }, 404);
-        sendSuccess(res, product, "Product retrieved successfully");
-    } catch (error) {
-        sendError(res, error);
-    }
-};
 
