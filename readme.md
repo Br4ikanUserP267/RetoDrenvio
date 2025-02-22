@@ -8,10 +8,9 @@ Se escogio de esta manera debido a que se bsuco tener opciones mejores de organi
 📂 backend  
 │   ├── 📂 config  
 │   │   ├── database.js  
-
 │   ├── 📂 models  
 │   │   ├── product.js  
-│   │   ├── specialPrice.js  
+│   │   ├──     specialPricejs  
 │   ├── 📂 routes  
 │   │   ├── productRoutes.js  
 │   │   ├── specialPriceRoutes.js  
