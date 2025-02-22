@@ -3,11 +3,12 @@
 Aplicación que consume y actualiza datos en una base de datos MongoDB a través de una API en Node.js, con una interfaz en React.
 
 ## 📂 Estructura del Proyecto
+Se escogio de esta manera debido a que se bsuco tener opciones mejores de organización de codigo y rehutilación de este 
 
 📂 backend  
 │   ├── 📂 config  
 │   │   ├── database.js  
-│   │   ├── env.js  
+
 │   ├── 📂 models  
 │   │   ├── product.js  
 │   │   ├── specialPrice.js  
@@ -26,7 +27,7 @@ Aplicación que consume y actualiza datos en una base de datos MongoDB a través
 │   ├── index.js  
 │   ├── app.js  
 │   ├── package.json  
-│   ├── .env  
+│   ├── .env 
 
 ## 📦 Instalación del Proyecto
 

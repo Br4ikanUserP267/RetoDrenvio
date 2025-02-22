@@ -1,11 +1,13 @@
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config(); // Cargar variables de entorno
 
 const allowedOrigins = [
     "http://localhost:3000",  // Desarrollo
-    "https://myproductionapp.com", // Producción
-    "http://localhost:5173"  // Desarrollo
-
-];
+    "http://localhost:5173",  // Desarrollo
+    process.env.PRODUCTION_URL // Producción (desde variable de entorno)
+].filter(Boolean); // Elimina valores `undefined` en caso de que la variable no esté definida
 
 const corsOptions = {
     origin: (origin, callback) => {
